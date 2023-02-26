@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Mosquito Game</title>
+        <style>
+            .playground{
+                position: relative;
+                background-color: green;
+                height: 580px;
+                width: 580px;
+                float: left;
+            }
+            .mosquito{
+                position: relative;
+                height: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="playground">
+            <img
+                class="mosquito"
+                id="mosquito"
+                onclick="hitMosquito()"
+                src="https://w0.peakpx.com/wallpaper/30/214/HD-wallpaper-mosquito-fly-leaf-sunset.jpg"
+            >
+        </div>
+        <div class="controls">
+            <h1 id="gameStatus"></h1>
+            <h2 >
+                <span>Total Score:-</span>
+                <span id="totalHit"></span>
+            </h2>
+            <button onclick="startGame()">Let's begin the Game</button>
+        </div>
+        <script>
+            var hitCount=0;
+            let isGameStart=false;
+            function startGame(){
+                document.getElementById('gameStatus').innerText="Game Started"
+                hitCount=0;
+                isGameStart=true;
+                let mosquito=document.getElementById("mosquito");
+                let time=setInterval(()=>{
+                    let i=Math.floor(Math.random()*580)+1;
+                    let j=Math.floor(Math.random()*580)+1;
+                    mosquito.style.left=i+"px";
+                    mosquito.style.top=j+"px";
+                },2000);
+                setTimeout(()=>{
+                    clearTimeout(time);
+                    isGameStart=false;
+                    document.getElementById('gameStatus').innerText="Game Over"
+                },15000);
+            }
+
+            function hitMosquito(){
+                if(isGameStart){
+                    hitCount+=1;
+                    document.getElementById('totalHit').innerText=hitCount;
+                }
+            }
+            
+        </script>
+    </body>
+</html>
